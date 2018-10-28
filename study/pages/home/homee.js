@@ -5,20 +5,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-    characteristicList: [{
+    characteristicList:[{
       text: "免配送费"
-    }, {
+    },{
       text: "0元起送"
-    }, {
+    },{
       text: "新商家"
-    }, {
+    },{
       text: "品牌商家"
-    }, {
+    },{
       text: "跨天预定"
     }],
-    sortList: [{
+    sortList:[{
       sort: "综合排序",
-      image: "",
+      image:"",
     }, {
       sort: "速度最快",
       image: "",
@@ -32,85 +32,85 @@ Page({
       sort: "配送费最低",
       image: "",
     }],
-    discountList: [{
+    discountList:[{
       icon: "减",
-      iconColor: "#FF635B",
+      iconColor: "#FF635B", 
       text: "满减优惠"
-    }, {
+    },{
       icon: "领",
-      iconColor: "#FF7298",
+      iconColor: "#FF7298", 
       text: "进店领券"
-    }, {
+    },{
       icon: "返",
-      iconColor: "#FB4343",
+      iconColor: "#FB4343", 
       text: "满返代金券"
-    }, {
+    },{
       icon: "折",
-      iconColor: "#C183E2",
+      iconColor: "#C183E2", 
       text: "折扣商品"
-    }, {
+    },{
       icon: "订",
-      iconColor: "#6FDF64",
+      iconColor: "#6FDF64", 
       text: "提前下单优惠"
-    }, {
+    },{
       icon: "赠",
-      iconColor: "#FDC41E",
+      iconColor: "#FDC41E", 
       text: "满赠活动"
-    }, {
+    },{
       icon: "免",
-      iconColor: "#43B697",
+      iconColor: "#43B697", 
       text: "满免配送"
     }],
-    categoryList: {
-      pageone: [{
+    categoryList:{
+      pageone:[{
         name: "美食",
-        src: "/pages/image/1.png"
+        src: "/pages/images/1.png"
       }, {
         name: "甜点饮品",
-        src: "/pages/image/2.png"
+        src: "/pages/images/2.png"
       }, {
         name: "美团超市",
-        src: "/pages/image/3.png"
+        src: "/pages/images/3.png"
       }, {
         name: "正餐精选",
-        src: "/pages/image/4.png"
+        src: "/pages/images/4.png"
       }, {
         name: "生鲜果蔬",
-        src: "/pages/image/5.png"
+        src: "/pages/images/5.png"
       }, {
         name: "全部商家",
-        src: "/pages/image/6.png"
+        src: "/pages/images/6.png"
       }, {
         name: "免配送费",
-        src: "/pages/image/7.png"
+        src: "/pages/images/7.png"
       }, {
         name: "新商家",
-        src: "/pages/image/8.png"
+        src: "/pages/images/8.png"
       }],
       pagetwo: [{
         name: "美食",
-        src: "/pages/image/1.png"
+        src: "/pages/images/1.png"
       }, {
         name: "甜点饮品",
-        src: "/pages/image/2.png"
+        src: "/pages/images/2.png"
       }, {
         name: "美团超市",
-        src: "/pages/image/3.png"
+        src: "/pages/images/3.png"
       }, {
         name: "正餐精选",
-        src: "/pages/image/4.png"
+        src: "/pages/images/4.png"
       }, {
         name: "生鲜果蔬",
-        src: "/pages/image/5.png"
+        src: "/pages/images/5.png"
       }, {
         name: "全部商家",
-        src: "/pages/image/6.png"
+        src: "/pages/images/6.png"
       }, {
         name: "免配送费",
-        src: "/pages/image/7.png"
+        src: "/pages/images/7.png"
       }, {
         name: "新商家",
-        src: "/pages/image/8.png"
+        src: "/pages/images/8.png"
       }]
     },
     selected: 0,
@@ -118,29 +118,29 @@ Page({
     mask2Hidden: true,
     animationData: "",
     location: "",
-    characteristicSelected: [false, false, false, false, false, false, false],
-    discountSelected: null,
+    characteristicSelected: [false,false,false,false,false,false,false],
+    discountSelected:null,
     selectedNumb: 0,
     sortSelected: "综合排序"
   },
-  finish: function() {
+  finish: function () {
     var that = this;
     wx.request({
       url: "https://www.easy-mock.com/mock/596257bc9adc231f357c4664/restaurant/filter",
       method: "GET",
-      success: function(res) {
+      success: function (res) {
         that.setData({
           restaurant: res.data.data.restaurant,
         })
       }
     });
   },
-  sortSelected: function(e) {
+  sortSelected: function (e) {
     var that = this;
     wx.request({
       url: "https://www.easy-mock.com/mock/596257bc9adc231f357c4664/restaurant/overAll",
       method: "GET",
-      success: function(res) {
+      success: function (res) {
         that.setData({
           restaurant: res.data.data.restaurant,
           sortSelected: that.data.sortList[e.currentTarget.dataset.index].sort
@@ -148,56 +148,56 @@ Page({
       }
     });
   },
-  clearSelectedNumb: function() {
+  clearSelectedNumb: function () {
     this.setData({
       characteristicSelected: [false],
       discountSelected: null,
       selectedNumb: 0
     })
   },
-  characteristicSelected: function(e) {
+  characteristicSelected: function (e) {
     var info = this.data.characteristicSelected;
     info[e.currentTarget.dataset.index] = !info[e.currentTarget.dataset.index];
     this.setData({
       characteristicSelected: info,
-      selectedNumb: this.data.selectedNumb + (info[e.currentTarget.dataset.index] ? 1 : -1)
+      selectedNumb: this.data.selectedNumb + (info[e.currentTarget.dataset.index]?1:-1)
     })
     console.log(e.currentTarget.dataset.index);
   },
-  discountSelected: function(e) {
-    if (this.data.discountSelected != e.currentTarget.dataset.index) {
+  discountSelected: function (e) {
+    if (this.data.discountSelected != e.currentTarget.dataset.index){
       this.setData({
         discountSelected: e.currentTarget.dataset.index,
-        selectedNumb: this.data.selectedNumb + (this.data.discountSelected == null ? 1 : 0)
+        selectedNumb: this.data.selectedNumb+(this.data.discountSelected==null?1:0)
       })
-    } else {
+    }else{
       this.setData({
         discountSelected: null,
         selectedNumb: this.data.selectedNumb - 1
       })
     }
   },
-  onTapTag: function(e) {
+  onTapTag: function (e) {
     this.setData({
       selected: e.currentTarget.dataset.index
     });
   },
-  mask1Cancel: function() {
+  mask1Cancel: function () {
     this.setData({
       mask1Hidden: true
     })
   },
-  mask2Cancel: function() {
+  mask2Cancel: function () {
     this.setData({
       mask2Hidden: true
     })
   },
-  onOverallTag: function() {
+  onOverallTag: function () {
     this.setData({
       mask1Hidden: false
     })
   },
-  onFilter: function() {
+  onFilter: function () {
     this.setData({
       mask2Hidden: false
     })
@@ -205,27 +205,27 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-
+  onLoad: function (options) {
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-
+  onReady: function () {
+  
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     var that = this;
     wx.request({
-      url: "https://www.easy-mock.com/mock/5bcae41c0616ca41e7001877/555/555",
+      url: "https://www.easy-mock.com/mock/596257bc9adc231f357c4664/restaurant/info",
       method: "GET",
-      success: function(res) {
-        that.setData({ //将数据发送到data中
+      success: function (res) {
+        that.setData({
           restaurant: res.data.data.restaurant,
           location: wx.getStorageSync('location')
         })
@@ -236,35 +236,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
-
+  onHide: function () {
+  
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
-
+  onUnload: function () {
+  
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
-
+  onPullDownRefresh: function () {
+  
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
-
+  onReachBottom: function () {
+  
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function () {
+  
   }
 })

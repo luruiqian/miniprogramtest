@@ -82,33 +82,31 @@ Page({
       }
     })
 
-wx.switchTab({
-  url: '/pages/home/home'
-})
-
-input: function (e) {
-  if (e.detail.value) {
-    this.setData({
-      hidden: false
+    wx.switchTab({
+      url: '/pages/home/home'
     })
-  } else{
-    this.setData({
-      hidden: true
-    }) 
+  },
+  input: function() {
+    if (e.detail.value) {
+      this.setData({
+        hidden: false
+      })
+    } else {
+      this.setData({
+        hidden: true
+      })
+    }
+  },
+  search: function(text) { 
+    var that = this; 
+    wx.request({ 
+      url: 'http://api.map.baidu.com/place/v2/search?query=' + text + '&page_size=20&page_num=0&scope=2&region=南昌&output=json&ak=btsVVWf0TM1zUBEbzFz6QqWF',
+       success: function(res) { 
+        console.log(res); 
+        that.setData({ 
+          locationList: res.data.results
+        })
+      }
+    })
   }
-}
-search: function (text) {
-   var that = this;
-   wx.request({
-     url: 'http://api.map.baidu.com/place/v2/search?query=' + text + '&page_size=20&page_num=0&scope=2&region=南昌&output=json&ak=btsVVWf0TM1zUBEbzFz6QqWF',
-     success: function(res) {
-       console.log(res);
-       that.setData({
-         locationList: res.data.results
-})
-    } 
-})
-}
-  }
-
 })
